@@ -1,5 +1,5 @@
-import { useSearchParams } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import Box from "../../components/Box";
 import classes from "./style.module.scss";
@@ -8,6 +8,8 @@ import PinterestIcon from "../../assets/icon-pinterest.svg";
 import InstagramIcon from "../../assets/icon-instagram.svg";
 
 const Home = () => {
+  const navigate = useNavigate();
+
   const [searchParams] = useSearchParams();
   const inputtedDate = searchParams.get("date");
 
@@ -36,13 +38,19 @@ const Home = () => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft(getTimeLeft());
+      if (new Date(inputtedDate || "2024-01-24 17:00:00") - new Date() > 0) {
+        setTimeLeft(getTimeLeft());
+      } else {
+        alert(`Inputted date cannot be smaller than today! (${new Date()})`);
+        navigate("/");
+        clearInterval(timer);
+      }
     }, 1000);
 
     return () => {
       clearInterval(timer);
     };
-  }, [getTimeLeft]);
+  }, [getTimeLeft, inputtedDate, navigate]);
 
   return (
     <>
