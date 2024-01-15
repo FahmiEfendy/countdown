@@ -1,5 +1,7 @@
+import Home from "./pages/Home";
+
 function App() {
-  return <p>Launch Countdown Timer</p>;
+  return <Home />;
 }
 
 export default App;
