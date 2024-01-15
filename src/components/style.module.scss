@@ -2,28 +2,44 @@
 
 .container {
   position: relative;
-  margin: 0 5% 5% 5%;
   width: 100%;
 
+  .box-width {
+    width: 100%;
+  }
+
   .container__inner {
-    background-color: #000;
-    border-radius: 12px 12px 0 0;
+    max-width: 100%;
+    margin: 0 10%;
 
     .box-size {
-      width: 150px;
+      @extend .box-width;
       height: 70px;
-      border-radius: 12px;
+      border-radius: 10px;
+      filter: drop-shadow(0px 10px 0px #111112);
+
+      @include apply-at-md-size {
+        width: 90%;
+        height: 60px;
+      }
+
+      @include apply-at-sm-size {
+        height: 50px;
+      }
+
+      @include apply-at-xs-size {
+        height: 40px;
+      }
     }
-    
+
     .top {
       @extend .box-size;
       background-color: $color-very-dark-blue;
     }
-    
+
     .bot {
       @extend .box-size;
       background-color: $color-dark-desaturated-blue;
-      filter: drop-shadow(0px 10px 0px #111112);
     }
   }
 
@@ -31,16 +47,52 @@
     color: $color-soft-red;
     position: absolute;
     top: 10%;
-    left: 20%;
+    left: 26%;
     font-size: $h1-font-size;
     font-weight: $font-weight;
+    font-family: $font-family;
     margin: 0;
+
+    @include apply-at-xl-size {
+      font-size: 80px;
+      top: 13%;
+    }
+
+    @include apply-at-md-size {
+      font-size: 65px;
+      left: 25%;
+    }
+
+    @include apply-at-md-size {
+      font-size: 55px;
+    }
+
+    @include apply-at-sm-size {
+      left: 26%;
+      top: 14%;
+      font-size: 52px;
+    }
+
+    @include apply-at-xs-size {
+      font-size: 38px;
+      left: 26%;
+      top: 15%;
+    }
   }
 
   p {
     color: $color-grayish-blue;
     text-align: center;
     font-weight: $font-weight;
-    margin-top: 15%;
+    margin-top: 20%;
+    letter-spacing: 0.3rem;
+
+    @include apply-at-sm-size {
+      font-size: 14px;
+    }
+
+    @include apply-at-xs-size {
+      font-size: 10px;
+    }
   }
 }
